@@ -1,74 +1,70 @@
-# PostgreSQL Basics: Key Concepts and Usage
+# PostgreSQL মৌলিক বিষয়সমূহ: মূল ধারণা ও ব্যবহার
 
-This document covers fundamental PostgreSQL concepts in a clear and structured format, suitable for beginners and intermediate learners.
-
----
-
-## 1. What is PostgreSQL?
-
-**PostgreSQL** is a powerful, open-source object-relational database management system (RDBMS). It is used for storing, managing, and retrieving structured data. It supports both **SQL** and **JSON** data types, making it highly versatile.
-
-**Key Features:**
-- ACID compliance ensures data reliability.
-- Extensible through custom functions and data types.
-- Robust support for concurrency and large datasets.
-- Ideal for both small-scale applications and enterprise-grade systems.
+এই ডকুমেন্টটি PostgreSQL-এর মৌলিক ধারণাগুলোকে সহজ এবং সংগঠিতভাবে উপস্থাপন করে, যা নতুন এবং মাঝারি স্তরের শিক্ষার্থীদের জন্য উপযোগী।
 
 ---
 
-## 2. What is the purpose of a database schema in PostgreSQL?
+## ১. PostgreSQL কী?
 
-A **database schema** defines the structure or blueprint of a database. It includes tables, columns, data types, constraints, and the relationships between tables.
+**PostgreSQL** হলো একটি শক্তিশালী, ওপেন-সোর্স, অবজেক্ট-রিলেশনাল ডেটাবেস ম্যানেজমেন্ট সিস্টেম (RDBMS)। এটি স্ট্রাকচারড ডেটা সংরক্ষণ, পরিচালনা ও রিট্রিভ করার জন্য ব্যবহৃত হয়। এটি **SQL** এবং **JSON** উভয় ধরণের ডেটাকে সমর্থন করে।
 
-**Benefits of using schemas:**
-- Logical organization of data.
-- Separation of concerns among different teams or applications.
-- Supports multiple users working on the same database without conflict.
-- Enhances security and access control.
+**মূল বৈশিষ্ট্য:**
+- ACID কমপ্লায়েন্ট – ডেটার নির্ভরযোগ্যতা নিশ্চিত করে।
+- কাস্টম ফাংশন ও ডেটা টাইপ তৈরি করা যায়।
+- বড় ডেটাসেট ও একাধিক ব্যবহারকারীর কনকারেন্ট অ্যাক্সেস সাপোর্ট করে।
+- ছোট অ্যাপ্লিকেশন থেকে শুরু করে এন্টারপ্রাইজ-লেভেলের প্রজেক্টের জন্য উপযুক্ত।
 
 ---
 
-## 3. Explain the **Primary Key** and **Foreign Key** concepts in PostgreSQL.
+## ২. PostgreSQL-এ ডেটাবেস স্কিমার উদ্দেশ্য কী?
+
+একটি **স্কিমা** হল ডেটাবেসের একটি গঠন বা কাঠামো যা টেবিল, কলাম, ডেটা টাইপ, কনস্ট্রেইন্ট এবং টেবিলগুলোর সম্পর্ক নির্ধারণ করে।
+
+**স্কিমা ব্যবহারের সুবিধা:**
+- ডেটা গুছিয়ে রাখা যায়।
+- ভিন্ন ভিন্ন টিম বা অ্যাপ্লিকেশনের কাজ আলাদা করে রাখা যায়।
+- নিরাপত্তা এবং এক্সেস কন্ট্রোল বাড়ে।
+- একই ডেটাবেসে একাধিক ব্যবহারকারী কনফ্লিক্ট ছাড়াই কাজ করতে পারে।
+
+---
+
+## ৩. PostgreSQL-এ **Primary Key** এবং **Foreign Key** কী?
 
 ### Primary Key:
-A column (or set of columns) that uniquely identifies each row in a table.
-- Must be unique and not null.
-- Each table can have only one primary key.
+একটি টেবিলের প্রতিটি সারিকে ইউনিকভাবে সনাক্ত করার জন্য ব্যবহৃত হয়।
+- এটি অবশ্যই ইউনিক এবং নাল হতে পারবে না।
+- একটি টেবিলে মাত্র একটি প্রাইমারি কি থাকতে পারে।
 
-**Example:**
-In the `rangers` table, `ranger_id` is the primary key.
+**উদাহরণ:** `rangers` টেবিলে `ranger_id` হলো প্রাইমারি কি।
 
 ### Foreign Key:
-A column in one table that refers to the primary key of another table.
-- Used to establish relationships between tables.
-- Maintains referential integrity.
+অন্য একটি টেবিলের প্রাইমারি কি-কে রেফার করে।
 
-**Example:**
-In the `sightings` table, `ranger_id` is a foreign key referencing `rangers.ranger_id`.
+**উদাহরণ:** `sightings` টেবিলে `ranger_id` হলো ফরেইন কি যা `rangers.ranger_id`-কে রেফার করে।
 
 ---
 
-## 4. What is the difference between the `VARCHAR` and `CHAR` data types?
+## ৪. `VARCHAR` এবং `CHAR` ডেটা টাইপের পার্থক্য কী?
 
 ### CHAR:
-- Fixed-length string.
-- Always reserves the specified number of characters.
-- Padding is done with spaces if the input is shorter.
+- ফিক্সড-লেংথ স্ট্রিং।
+- নির্দিষ্ট সংখ্যক ক্যারেক্টার সবসময় সংরক্ষণ করে।
+- ছোট ইনপুট হলে বাকি জায়গা স্পেস দিয়ে পূরণ হয়।
 
-**Example:** `CHAR(10)` reserves exactly 10 characters.
+**উদাহরণ:** `CHAR(10)` সবসময় ১০টি ক্যারেক্টার রাখবে।
 
 ### VARCHAR:
-- Variable-length string.
-- Stores only the characters used (up to the specified limit).
+- ভ্যারিয়েবল-লেংথ স্ট্রিং।
+- যতটুকু ইনপুট দেয়, ততটুকুই ব্যবহার করে।
 
-**Example:** `VARCHAR(10)` can store up to 10 characters but uses space only as needed.
+**উদাহরণ:** `VARCHAR(10)` সর্বোচ্চ ১০ ক্যারেক্টার রাখতে পারে।
 
 ---
 
-## 5. Explain the purpose of the `WHERE` clause in a `SELECT` statement.
+## ৫. `SELECT` স্টেটমেন্টে `WHERE` ক্লজের কাজ কী?
 
-The `WHERE` clause is used to **filter** records based on a specific condition.
+`WHERE` ক্লজ নির্দিষ্ট শর্ত অনুযায়ী ডেটা ফিল্টার করতে ব্যবহৃত হয়।
 
-**Example:**
+**উদাহরণ:**
 ```sql
 SELECT * FROM rangers WHERE region = 'Northern Hills';
